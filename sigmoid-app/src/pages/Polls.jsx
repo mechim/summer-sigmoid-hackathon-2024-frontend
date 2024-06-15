@@ -52,9 +52,9 @@ export default function Polls() {
         pt: 2,
       }}
     >
-      <Typography variant="h4" sx={{ textAlign: "center", fonSize: "10px" }}>
+      <Typography variant="h3" sx={{ textAlign: "center", color: "#427aa1" }}>
         {" "}
-        Forum
+        Review
       </Typography>
       <TextField
         id="search"

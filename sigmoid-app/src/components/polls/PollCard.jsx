@@ -27,14 +27,16 @@ export default function PollCard({ poll }) {
         px: 2,
         py: 0.5,
         cursor: "pointer",
+        borderRadius: "13px",
+        boxShadow: "0px 4px 10px 2px rgba(0, 0, 0, 0.2)",
       }}
       onClick={handleCardClick}
     >
       <CardMedia
         component="img"
         sx={{
-          width: 120,
-          height: 120,
+          width: 110,
+          height: 110,
           objectFit: "cover",
           borderRadius: 1,
         }}
@@ -43,7 +45,11 @@ export default function PollCard({ poll }) {
       />
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" component="div" sx={{ flex: 1 }}>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ flex: 1, color: "#427aa1" }}
+          >
             {poll.product.name}
           </Typography>
         </Box>
