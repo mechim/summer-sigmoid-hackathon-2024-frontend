@@ -8,6 +8,7 @@ import {
   Rating,
   Button,
   Container,
+  TextField,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -20,6 +21,9 @@ export default function PollDiscussion() {
   const { poll } = state;
 
   const [reviews, setReviews] = useState([]);
+  const [comment, setComment] = useState("");
+
+  const [avg, setAvg] = useState(0);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -42,6 +46,19 @@ export default function PollDiscussion() {
     fetchReviews();
   }, []);
 
+  useEffect(() => {
+    const calculateAverage = () => {
+      const sum = poll.values.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      );
+      const average = sum / poll.values.length;
+      setAvg(average);
+    };
+
+    calculateAverage();
+  }, []);
+
   const [ratings, setRatings] = useState(
     poll.product.category.parameters_list.map((category) => ({
       name: category,
@@ -56,18 +73,41 @@ export default function PollDiscussion() {
     setRatings(newRatings);
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-  };
+  const handleSubmit = async () => {
+    try {
+      const response = await api.post("/ratings/create", {
+        values: ratings.map((r) => r.rating * 2),
+        author: 6,
+        product: poll.product.id,
+        comment: comment,
+      });
 
-  const calculateAverage = () => {
-    const sum = poll.values.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
+      const newReview = response.data["new_rating"];
+      setReviews(
+        [...reviews, newReview].sort((a, b) => b.author.score - a.author.score)
+      );
+
+      const resp = await api.post(`/ratings/recalc-avg/${poll.product.id}`);
+      const newRating = resp.data["average_rating"];
+
+      const sum = resp.data["average_rating"].values.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      );
+      const average = sum / poll.values.length;
+      setAvg(average);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setComment("");
+    setRatings(
+      poll.product.category.parameters_list.map((category) => ({
+        name: category,
+        rating: 0,
+      }))
     );
-    const average = sum / poll.values.length;
-
-    return average;
+    setSubmitted(true);
   };
 
   return (
@@ -91,9 +131,7 @@ export default function PollDiscussion() {
           mt: 2,
         }}
       >
-        <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-        >
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
           <CardMedia
             component="img"
             sx={{
@@ -101,6 +139,7 @@ export default function PollDiscussion() {
               height: 120,
               borderRadius: 1,
               ml: 17,
+              mt: 12,
             }}
             image={poll.product.image_url}
             alt={poll.product.name}
@@ -126,14 +165,14 @@ export default function PollDiscussion() {
                 }}
               >
                 <Rating
-                  value={calculateAverage() / 2}
+                  value={avg / 2}
                   readOnly
                   precision={0.1}
                   icon={<StarIcon fontSize="small" />}
                   emptyIcon={<StarBorderIcon fontSize="small" />}
                 />
                 <Typography variant="h5" color="text.secondary">
-                  {calculateAverage().toFixed(1)}
+                  {avg.toFixed(0.1)}
                 </Typography>
               </Box>
               <Typography variant="body1">Characteristics:</Typography>
@@ -158,12 +197,21 @@ export default function PollDiscussion() {
             </Box>
           </CardContent>
         </Box>
+        <TextField
+          multiline
+          rows={4}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Enter your comment here..."
+          variant="outlined"
+          fullWidth
+        />
         <Button
           size="small"
           color="primary"
           onClick={handleSubmit}
           disabled={submitted}
-          sx={{ pb: 1 }}
+          sx={{ pb: 1, mt: 1.5 }}
         >
           {submitted ? "Submitted" : "Submit Ratings"}
         </Button>
