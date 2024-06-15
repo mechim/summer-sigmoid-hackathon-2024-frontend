@@ -1,17 +1,28 @@
 import { Container, Typography, Button, Box } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import api from "../axios";
+import { useEffect, useState } from "react";
 
 export default function Categories() {
   const navigate = useNavigate();
 
-  const categories = [
-    { id: 1, name: "Phones" },
-    { id: 2, name: "Laptops" },
-    { id: 3, name: "Cars" },
-  ];
+  const [categories, setCategories] = useState([]);
 
-  const handleCategoryChoice = (categoryName) => {
-    localStorage.setItem("category", categoryName);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("/categories/get_all");
+        setCategories(response.data["categories"]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handleCategoryChoice = (categoryId) => {
+    localStorage.setItem("category", categoryId);
     navigate("/tinder");
   };
 
@@ -37,7 +48,7 @@ export default function Categories() {
           <Button
             key={category.id}
             variant="contained"
-            onClick={() => handleCategoryChoice(category.name)}
+            onClick={() => handleCategoryChoice(category.id)}
             sx={{ mt: 2 }}
           >
             {category.name}
