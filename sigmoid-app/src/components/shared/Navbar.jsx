@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <Box
       className="container"
-      sx={{ position: "fixed", bottom: "0", width: "100%" }}
+      sx={{ position: "fixed", bottom: "0", width: "393px"}}
     >
       <BottomNavigation
         showLabels
@@ -36,38 +36,38 @@ export default function Navbar() {
         sx={{ width: "100%" }}
       >
         <BottomNavigationAction
-          label="Forum"
-          sx={{
+          label="Review"
+          sx={{ fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
             },
             "&.Mui-selected": {
-              color: "#49a078",
+              color: "#427aa1",
               fontSize: "20px",
             },
             "&:hover": {
               "& .MuiBottomNavigationAction-label": {
-                color: "#49a078",
-                fontSize: "20px",
+                color: "#427aa1",
+                fontSize: "20px", 
               },
             },
           }}
         />
         <BottomNavigationAction
           label="Tinder"
-          sx={{
+          sx={{fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
             },
             "&.Mui-selected": {
-              color: "#49a078",
+              color: "#427aa1",
               fontSize: "20px",
             },
             "&:hover": {
               "& .MuiBottomNavigationAction-label": {
-                color: "#49a078",
+                color: "#427aa1",
                 fontSize: "20px",
               },
             },
@@ -75,20 +75,22 @@ export default function Navbar() {
         />
         <BottomNavigationAction
           label="Matches"
-          sx={{
+          sx={{ 
+            fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
             },
             "&.Mui-selected": {
-              color: "#49a078",
+              color: "#427aa1",
               fontSize: "20px",
             },
             "&:hover": {
               "& .MuiBottomNavigationAction-label": {
-                color: "#49a078",
+                color: "#427aa1",
                 fontSize: "20px",
               },
+
             },
           }}
         />

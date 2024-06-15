@@ -1,10 +1,8 @@
 .container{
- 
-    border-color:black ;
+    border-color:#627c8f ;
     border-top-style: solid;
-    margin-left: -9px;
     padding: 0px;
-    border-width: 1px;
+    border-width: 1px;  
 }
 
 .text{

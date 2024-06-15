@@ -41,48 +41,52 @@ export default function Polls() {
   }, [searchQuery]);
 
   return (
-    <Container
-      sx={{
-        position: "absolute",
-        top: 0,
-        width: "100%",
-        height: "auto",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        pt: 2,
-      }}
-    >
-      <Typography variant="h4" sx={{ textAlign: "center", fonSize:'10px'}}>
-        {" "}
-        Forum
-      </Typography>
-      <TextField
-        id="search"
-        label="Search Polls"
-        variant="outlined"
-        value={searchQuery}
-        onChange={handleSearchChange}
-        onKeyDown={(event) => {
-          if (event.key === "Enter") {
-            filterPolls();
-          }
-        }}
-        autoComplete="off"
-        sx={{ width: "103.5%", mt: 2, mb: 2 }}
-      />
-      <Box
+    <div style={{width:"393px", height:"873px"}}>
+      <Container
         sx={{
+          position: "absolute",
+          top: 0,
+          width: "100%",
+          height: "auto",
           display: "flex",
           flexDirection: "column",
-          gap: 3,
           alignItems: "center",
+          pt: 2,
+          
         }}
       >
-        {filteredPolls.map((poll, index) => (
-          <PollCard key={index} poll={poll} />
-        ))}
-      </Box>
-    </Container>
+
+        <Typography variant="h3" sx={{ textAlign: "center", color:'#427aa1'}}>
+          {" "}
+          Review
+        </Typography>
+        <TextField
+          id="search"
+          label="Search Polls"
+          variant="outlined"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              filterPolls();
+            }
+          }}
+          autoComplete="off"
+          sx={{ width: "103.5%", mt: 2, mb: 2 }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+            alignItems: "center",
+          }}
+        >
+          {filteredPolls.map((poll, index) => (
+            <PollCard key={index} poll={poll} />
+          ))}
+        </Box>
+      </Container>
+    </div>
   );
 }

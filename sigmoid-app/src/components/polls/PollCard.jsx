@@ -10,6 +10,7 @@ import {
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useNavigate } from "react-router-dom";
+import shadows from "@mui/material/styles/shadows";
 
 export default function PollCard({ poll }) {
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ export default function PollCard({ poll }) {
         px: 2,
         py: 0.5,
         cursor: "pointer",
+        borderRadius: "13px",
+        boxShadow: "0px 4px 10px 2px rgba(0, 0, 0, 0.2)"
       }}
       onClick={handleCardClick}
     >
@@ -43,7 +46,7 @@ export default function PollCard({ poll }) {
       />
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" component="div" sx={{ flex: 1 }}>
+          <Typography variant="h5" component="div" sx={{ flex: 1, color:'#427aa1'}}>
             {poll.name}
           </Typography>
         </Box>

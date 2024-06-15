@@ -16,6 +16,7 @@ export default function Categories() {
   };
 
   return (
+    <div style={{ width:'393px', height:'873px'}}>
     <Container
       sx={{
         position: "absolute",
@@ -26,6 +27,7 @@ export default function Categories() {
         flexDirection: "column",
         alignItems: "center",
         pt: 2,
+        
       }}
     >
       <Typography variant="h5" sx={{ textAlign: "center" }}>
@@ -38,12 +40,14 @@ export default function Categories() {
             key={category.id}
             variant="contained"
             onClick={() => handleCategoryChoice(category.name)}
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, backgroundColor:'#427aa1', width:'300px', height:'50px', fontSize:'24px', borderRadius:'8px'}}
           >
             {category.name}
+
           </Button>
         ))}
       </Box>
     </Container>
+    </div>
   );
 }
