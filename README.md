@@ -1,0 +1,1 @@
+# summer-sigmoid-hackathon-2024-frontend
