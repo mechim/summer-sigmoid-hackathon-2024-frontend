@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Navbar() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(-1);
   const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
