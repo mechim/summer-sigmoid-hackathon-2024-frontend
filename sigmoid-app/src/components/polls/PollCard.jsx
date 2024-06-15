@@ -9,18 +9,26 @@ import {
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useNavigate } from "react-router-dom";
 
 export default function PollCard({ poll }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate("/discussion", { state: { poll } });
+  };
+
   return (
     <Card
       sx={{
         width: 340,
         display: "flex",
-        flexDirection: "row",
         alignItems: "center",
         px: 2,
         py: 0.5,
+        cursor: "pointer",
       }}
+      onClick={handleCardClick}
     >
       <CardMedia
         component="img"
