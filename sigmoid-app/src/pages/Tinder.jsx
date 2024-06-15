@@ -1,43 +1,57 @@
 import TinderCard from "react-tinder-card";
 import { useEffect, useState } from "react";
+import './Tinder.css'
+import MyTinderCard from "../components/tinder/MyTinderCard";
+import { Button } from "@mui/material";
+const propertiesData = [
+    'Camera',
+    'Battery',
+    'Durability',
+    'Performance',
+    'Memory'
+]
+function pairEachElement(arr) {
+    let pairs = [];
 
-const data = [
-  {
-    name: "John Doe",
-    url: "https://via.placeholder.com/300/FF5733/FFFFFF?text=John+Doe",
-  },
-  {
-    name: "Jane Smith",
-    url: "https://via.placeholder.com/300/33FF57/FFFFFF?text=Jane+Smith",
-  },
-  {
-    name: "Steve Brown",
-    url: "https://via.placeholder.com/300/3357FF/FFFFFF?text=Steve+Brown",
-  },
-];
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        pairs.push([arr[i], arr[j]]);
+      }
+    }
+
+    return pairs;
+  }
+const offset = 350;
 
 function Tinder() {
-  const [people, setPeople] = useState(data);
+  const [properties, setProperties] = useState(propertiesData);
+  const [propertyPairs, setPropertyPairs] = useState([]);
+  const [direction, setDirection] = useState('');
+//   const 
   useEffect(() => {
     console.log("KILL YOURSELF");
+    setPropertyPairs(pairEachElement(properties));
   }, []);
 
   const swiped = (direction, nameToDelete) => {
     console.log('swiped!');
-    
+    setDirection(direction.toString());
   };
 
   const outOfFrame = (name) => {
     console.log(name + " left the screen!");
-    setPeople(people => people.filter(person => person.name !== name));
-    console.log(people);
+    setPropertyPairs(propertyPairs => propertyPairs.filter(pair => pair.toString() !== name));
+    console.log(propertyPairs[propertyPairs.length]);
+    if (direction == 'left'){
+        
+    }
   };
 
   return (
     <div
       style={{
         position: "absolute",
-        top: 0,
+        top: offset,
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -47,49 +61,39 @@ function Tinder() {
         justifyItems: "center",
       }}
     >
-        {/* <div className="cardContainer"> */}
-            <h2 style={{ position: "absolute", top: 500 }}>
+        <h1  style={{ position: "absolute" ,top:-offset}}>Set your preferences...</h1>
+        <h2 style={{ position: "absolute" }}>
             No more People Left
         </h2>
-        {people.map((person) => (
+        {propertyPairs.map((pair) => (
+        <>
             <TinderCard
-            className="swipe"
-            onSwipe={(dir) => swiped(dir, person.name)}
-            key={person.name}
-            onCardLeftScreen={() => outOfFrame(person.name)}
-            preventSwipe={["down", "up"]}
-            >
-            <div
-                style={{
-                // backgroundImage: 'url(' + person.url + ')',
-                position: "relative",
-                // backgroundSize: 'cover',
-                backgroundColor: "gray",
-                backgroundPosition: "center",
-                width: 300,
-                maxWidth: 600,
-                height: 400,
-                maxHeight: 800,
-                borderRadius: 15,
-                  marginTop: 800,
-                borderColor: "black",
-                border: "solid black 2px",
-                //   boxShadow: 0px 18px 50px -5px rgba(0, 0, 0, 0.3),
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "flex-end",
-                padding: 20,
-                boxSizing: "border-box",
-                color: "white",
-                fontSize: 24,
-                }}
-            >
-                <h3>{person.name}</h3>
-            </div>
+                className="swipe"
+                onSwipe={(dir) => swiped(dir, pair.toString())}
+                key={pair.toString()}
+                onCardLeftScreen={() => outOfFrame(pair.toString())}
+                preventSwipe={["down", "up"]}
+                swipeRequirementType="velocity"
+                swipeThreshold={1}
+                >
+                    <MyTinderCard type='prefs' prefs={pair}/>
             </TinderCard>
+
+
+        </>
+
         ))}
-        {/* </div> */}
-      
+        {propertyPairs[0] ? 
+            <div style={{position: 'relative', top: offset/1.2, width: '85%', display: 'flex', flexDirection: 'row', justifyContent:'space-between'}}>
+                <Button size='large' style={{color:'black', fontWeight: 'bold'}}>{propertyPairs[propertyPairs.length-1][0]}</Button>
+                <Button style={{color:'black', fontWeight: 'bold'}}>{propertyPairs[propertyPairs.length-1][1]}</Button>
+
+            </div>
+            : null
+        }
+        
+
+
     </div>
   );
 }
