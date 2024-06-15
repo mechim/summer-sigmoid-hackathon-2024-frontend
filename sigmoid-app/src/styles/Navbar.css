@@ -1,0 +1,12 @@
+.container{
+ 
+    border-color:black ;
+    border-top-style: solid;
+    margin-left: -9px;
+    padding: 0px;
+    border-width: 1px;
+}
+
+.text{
+    font-size: 72px;
+}

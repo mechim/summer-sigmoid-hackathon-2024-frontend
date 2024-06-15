@@ -64,12 +64,13 @@ export default function PollDiscussion() {
   ];
 
   return (
-    <Container
+    <Container 
       sx={{
         width: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginBottom: "50px",
       }}
     >
       <Card
