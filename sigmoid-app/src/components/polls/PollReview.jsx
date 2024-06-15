@@ -11,17 +11,26 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import api from "../../axios";
 
 export default function PollReview({ review }) {
   const [votes, setVotes] = useState(review.author.score);
   const [hasVoted, setHasVoted] = useState(false);
 
-  const handleVote = (type) => {
-    if (type === "up") {
-      setVotes(votes + 1);
-    } else if (type === "down") {
-      setVotes(votes - 1);
+  const handleVote = async (type, userId) => {
+    let response;
+
+    try {
+      if (type === "up") {
+        response = await api.patch(`/users/inc/${userId}`);
+      } else if (type === "down") {
+        response = await api.patch(`/users/dec/${userId}`);
+      }
+    } catch (error) {
+      console.log(error);
     }
+
+    setVotes(response.data.user.score);
     setHasVoted(true);
   };
 
@@ -61,7 +70,7 @@ export default function PollReview({ review }) {
             sx={{ display: "flex", alignItems: "center", marginTop: "1rem" }}
           >
             <IconButton
-              onClick={() => handleVote("up")}
+              onClick={() => handleVote("up", review.author.id)}
               color="primary"
               disabled={hasVoted}
             >
