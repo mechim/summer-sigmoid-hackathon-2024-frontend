@@ -28,7 +28,7 @@ export default function Matches() {
         pt: 2,
       }}
     >
-      <Typography gutterBottom variant="h2" sx={{ textAlign: "center" }}>
+      <Typography gutterBottom variant="h3" sx={{ textAlign: "center", color:'#427aa1'}}>
         {" "}
         Matches
       </Typography>

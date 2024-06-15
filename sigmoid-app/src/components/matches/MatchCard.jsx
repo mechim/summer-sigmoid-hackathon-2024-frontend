@@ -27,7 +27,7 @@ export default function MatchCard({ match }) {
       />
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" component="div" sx={{ flex: 1 }}>
+          <Typography variant="h5" component="div" sx={{ flex: 1, color:"#427aa1" }}>
             {match.name}
           </Typography>
         </Box>
@@ -44,7 +44,6 @@ export default function MatchCard({ match }) {
               key={index}
               variant="body2"
               color="text.secondary"
-              sx={{ ml: 2 }}
             >
               {category.name}
             </Typography>
