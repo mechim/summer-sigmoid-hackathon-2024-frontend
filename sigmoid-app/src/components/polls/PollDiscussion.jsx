@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardMedia,
@@ -13,14 +13,38 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useLocation } from "react-router-dom";
 import PollReview from "./PollReview";
+import api from "../../axios";
 
 export default function PollDiscussion() {
   const { state } = useLocation();
   const { poll } = state;
 
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await api.post("/ratings/get_by_pn", {
+          name: poll.product.name,
+        });
+
+        const filteredReviews = response.data["ratings"].filter(
+          (review) => review.author.username !== "KidNamedAverage"
+        );
+        filteredReviews.sort((a, b) => b.author.score - a.author.score);
+
+        setReviews(filteredReviews);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   const [ratings, setRatings] = useState(
-    poll.categories.map((category) => ({
-      name: category.name,
+    poll.product.category.parameters_list.map((category) => ({
+      name: category,
       rating: 0,
     }))
   );
@@ -36,35 +60,18 @@ export default function PollDiscussion() {
     setSubmitted(true);
   };
 
-  const averageRating =
-    poll.categories.reduce((acc, category) => acc + category.rating, 0) /
-    poll.categories.length;
+  const calculateAverage = () => {
+    const sum = poll.values.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const average = sum / poll.values.length;
 
-  const reviews = [
-    {
-      author: "John Doe",
-      ratings: [
-        { name: "Category 1", rating: 4 },
-        { name: "Category 2", rating: 3.5 },
-      ],
-      comment: "Great product!",
-      upvotes: 10,
-      downvotes: 2,
-    },
-    {
-      author: "Jane Smith",
-      ratings: [
-        { name: "Category 1", rating: 3 },
-        { name: "Category 2", rating: 4 },
-      ],
-      comment: "Pretty good overall.",
-      upvotes: 7,
-      downvotes: 1,
-    },
-  ];
+    return average;
+  };
 
   return (
-    <Container 
+    <Container
       sx={{
         width: "100%",
         display: "flex",
@@ -95,13 +102,13 @@ export default function PollDiscussion() {
               borderRadius: 1,
               ml: 17,
             }}
-            image={poll.image}
-            alt={poll.name}
+            image={poll.product.image_url}
+            alt={poll.product.name}
           />
           <CardContent sx={{ flex: 1 }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography variant="h5" component="div" sx={{ flex: 1 }}>
-                {poll.name}
+                {poll.product.name}
               </Typography>
             </Box>
             <Box
@@ -119,28 +126,29 @@ export default function PollDiscussion() {
                 }}
               >
                 <Rating
-                  value={averageRating}
+                  value={calculateAverage() / 2}
                   readOnly
                   precision={0.1}
                   icon={<StarIcon fontSize="small" />}
                   emptyIcon={<StarBorderIcon fontSize="small" />}
                 />
                 <Typography variant="h5" color="text.secondary">
-                  {averageRating.toFixed(1)}
+                  {calculateAverage().toFixed(1)}
                 </Typography>
               </Box>
               <Typography variant="body1">Characteristics:</Typography>
-              {poll.categories.map((category, index) => (
+              {ratings.map((parameter, index) => (
                 <Box key={index} sx={{ display: "flex", gap: 1, width: 300 }}>
                   <Typography variant="body2" color="text.secondary">
-                    {category.name}:
+                    {parameter.name}:
                   </Typography>
                   <Rating
-                    value={ratings[index].rating}
+                    value={parameter.rating}
                     onChange={(event, newValue) =>
                       handleRatingChange(index, newValue)
                     }
                     precision={0.1}
+                    max={5}
                     icon={<StarIcon fontSize="small" />}
                     emptyIcon={<StarBorderIcon fontSize="small" />}
                     readOnly={submitted}
