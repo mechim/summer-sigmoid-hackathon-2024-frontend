@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Categories from "./pages/Categories";
 import PageLayout from "./routes/PageLayout";
+import './App.css';
 
 function App() {
   return (
