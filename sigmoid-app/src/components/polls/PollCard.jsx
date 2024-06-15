@@ -10,7 +10,6 @@ import {
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useNavigate } from "react-router-dom";
-import shadows from "@mui/material/styles/shadows";
 
 export default function PollCard({ poll }) {
   const navigate = useNavigate();
@@ -29,25 +28,29 @@ export default function PollCard({ poll }) {
         py: 0.5,
         cursor: "pointer",
         borderRadius: "13px",
-        boxShadow: "0px 4px 10px 2px rgba(0, 0, 0, 0.2)"
+        boxShadow: "0px 4px 10px 2px rgba(0, 0, 0, 0.2)",
       }}
       onClick={handleCardClick}
     >
       <CardMedia
         component="img"
         sx={{
-          width: 120,
-          height: 120,
+          width: 110,
+          height: 110,
           objectFit: "cover",
           borderRadius: 1,
         }}
-        image={poll.image}
-        alt={poll.name}
+        image={poll.product.image_url}
+        alt={poll.product.name}
       />
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" component="div" sx={{ flex: 1, color:'#427aa1'}}>
-            {poll.name}
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ flex: 1, color: "#427aa1" }}
+          >
+            {poll.product.name}
           </Typography>
         </Box>
         <Box
@@ -58,20 +61,20 @@ export default function PollCard({ poll }) {
           }}
         >
           <Typography variant="body1">Characteristics:</Typography>
-          {poll.categories.map((category, index) => (
+          {poll.product.category.parameters_list.map((parameter, index) => (
             <Box key={index} sx={{ display: "flex", gap: 1, width: 300 }}>
               <Typography variant="body2" color="text.secondary">
-                {category.name}:
+                {parameter}:
               </Typography>
               <Rating
-                value={category.rating}
+                value={poll.values[index]}
                 readOnly
                 precision={0.1}
                 icon={<StarIcon fontSize="small" />}
                 emptyIcon={<StarBorderIcon fontSize="small" />}
               />
               <Typography variant="body2" color="text.secondary">
-                {category.rating.toFixed(1)}
+                {poll.values[index].toFixed(1)}
               </Typography>
             </Box>
           ))}
