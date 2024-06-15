@@ -28,9 +28,7 @@ export default function Navbar() {
       <BottomNavigation
         showLabels
         value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
+        onChange={handleChange}
         sx={{ width: "100%" }}
       >
         <BottomNavigationAction label="Polls" />
