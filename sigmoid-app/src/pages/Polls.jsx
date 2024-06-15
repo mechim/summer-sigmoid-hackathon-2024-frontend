@@ -53,9 +53,9 @@ export default function Polls() {
         pt: 2,
       }}
     >
-      <Typography variant="h2" sx={{ textAlign: "center" }}>
+      <Typography variant="h4" sx={{ textAlign: "center", fonSize:'10px'}}>
         {" "}
-        Polls
+        Forum
       </Typography>
       <TextField
         id="search"
