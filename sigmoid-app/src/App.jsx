@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/shared/Navbar";
+import Matches from "./pages/Matches";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <Route index />
           <Route path="/polls" />
           <Route path="/tinder" />
-          <Route path="/matches" />
+          <Route path="/matches" element={<Matches />} />
         </Routes>
       </BrowserRouter>
     </>
