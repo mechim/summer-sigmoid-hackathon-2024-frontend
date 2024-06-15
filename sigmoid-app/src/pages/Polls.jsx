@@ -1,29 +1,28 @@
 import PollCard from "../components/polls/PollCard";
 import { Box, Container, Typography, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
+import api from "../axios";
 
 export default function Polls() {
-  const polls = [
-    {
-      name: "Product 1",
-      image: "https://via.placeholder.com/140",
-      categories: [
-        { name: "Category 1", rating: 3.8 },
-        { name: "Category 2", rating: 3.8 },
-      ],
-    },
-    {
-      name: "Product 2",
-      image: "https://via.placeholder.com/140",
-      categories: [
-        { name: "Category 1", rating: 3.8 },
-        { name: "Category 2", rating: 3.8 },
-      ],
-    },
-  ];
+  const [polls, setPolls] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPolls, setFilteredPolls] = useState(polls);
+
+  useEffect(() => {
+    const fetchRandomPolls = async () => {
+      try {
+        const categoryId = localStorage.getItem("category");
+        const response = await api.get(`/ratings/get-rr-by-cat/${categoryId}`);
+        console.log(response.data["ratings_data"]);
+        setPolls(response.data["ratings_data"]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchRandomPolls();
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -53,9 +52,9 @@ export default function Polls() {
         pt: 2,
       }}
     >
-      <Typography variant="h4" sx={{ textAlign: "center", fonSize:'10px'}}>
+      <Typography variant="h3" sx={{ textAlign: "center", color: "#427aa1" }}>
         {" "}
-        Forum
+        Review
       </Typography>
       <TextField
         id="search"
@@ -79,7 +78,7 @@ export default function Polls() {
           alignItems: "center",
         }}
       >
-        {filteredPolls.map((poll, index) => (
+        {polls.map((poll, index) => (
           <PollCard key={index} poll={poll} />
         ))}
       </Box>
