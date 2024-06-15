@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Box,
-  Typography,
-  Rating,
-} from "@mui/material";
+import { Card, CardMedia, CardContent, Box, Typography } from "@mui/material";
 
 export default function MatchCard({ match }) {
   return (
@@ -34,25 +27,27 @@ export default function MatchCard({ match }) {
       />
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{ flex: 1 }}
-          >
+          <Typography variant="h5" component="div" sx={{ flex: 1 }}>
             {match.name}
           </Typography>
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
+          <Typography variant="body1">Matching categories:</Typography>
           {match.categories.map((category, index) => (
-            <Box key={index} sx={{ display: "flex", gap: 1 }}>
-              <Typography variant="body2" color="text.secondary">
-                {category.name}:
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {category.rating.toFixed(1)}
-              </Typography>
-            </Box>
+            <Typography
+              key={index}
+              variant="body2"
+              color="text.secondary"
+              sx={{ ml: 2 }}
+            >
+              {category.name}
+            </Typography>
           ))}
         </Box>
       </CardContent>

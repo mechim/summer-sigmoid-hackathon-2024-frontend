@@ -1,4 +1,4 @@
-import { Box, Card, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import MatchCard from "../components/matches/MatchCard";
 
 export default function Matches() {
@@ -6,18 +6,12 @@ export default function Matches() {
     {
       name: "Product 1",
       image: "https://via.placeholder.com/140",
-      categories: [
-        { name: "Category 1", rating: 3.8 },
-        { name: "Category 2", rating: 3.8 },
-      ],
+      categories: [{ name: "Category 1" }, { name: "Category 2" }],
     },
     {
       name: "Product 2",
       image: "https://via.placeholder.com/140",
-      categories: [
-        { name: "Category 1", rating: 3.8 },
-        { name: "Category 2", rating: 3.8 },
-      ],
+      categories: [{ name: "Category 1" }, { name: "Category 2" }],
     },
   ];
 
