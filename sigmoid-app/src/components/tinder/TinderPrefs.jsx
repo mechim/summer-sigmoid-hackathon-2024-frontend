@@ -1,7 +1,7 @@
 import TinderCard from "react-tinder-card";
 import { useEffect, useState } from "react";
 import MyTinderCard from "../tinder/MyTinderCard";
-import { Button } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 const propertiesData = [
     'Camera',
     'Battery',
@@ -21,21 +21,32 @@ function pairEachElement(arr) {
     return pairs;
   }
 
-function TinderPrefs() {
+function TinderPrefs({onFinish}) {
+  // const {setCheckPrefs} = props;
   const [properties, setProperties] = useState(propertiesData);
   const [propertyPairs, setPropertyPairs] = useState([]);
-  const [direction, setDirection] = useState('');
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     setPropertyPairs(pairEachElement(properties));
+    const ogLength = propertyPairs.length;
+    setStarted(true);
   }, []);
 
   useEffect(() => {
-    console.log(properties);
-  },[properties])
+    console.log(propertyPairs.length + " " + started);
+    if (propertyPairs.length <= 0){
+      if (!started){
+        return
+      } 
+
+      localStorage.setItem('prefs', true);
+      onFinish();
+      // setCheckPrefs(true);
+    }
+  },[propertyPairs])
   const swiped = (direction, nameToDelete) => {
     console.log('swiped!');
-    setDirection(direction.toString());
     console.log(propertyPairs[propertyPairs.length-1]);
     if (propertyPairs[0]){
         let chosenIndex, loserIndex;
@@ -93,6 +104,7 @@ function TinderPrefs() {
         justifyItems: "center",
       }}
     >
+      {/* <LinearProgress value={progress} style={{position: 'absolute', top:2*tinderOffset}}/> */}
         <h1  style={{ position: "absolute" ,top:-tinderOffset}}>Set your preferences</h1>
         {/* <h2 style={{ position: "absolute" }}>
             No more People Left

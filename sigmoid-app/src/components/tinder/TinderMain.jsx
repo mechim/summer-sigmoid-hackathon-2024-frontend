@@ -56,7 +56,7 @@ function TinderMain() {
         justifyItems: "center",
       }}
     >
-        <h1  style={{ position: "absolute" ,top:-tinderOffset}}>Set your preferences...</h1>
+        <h1  style={{ position: "absolute" ,top:-tinderOffset}}>For You</h1>
         <h2 style={{ position: "absolute" }}>
             No more products Left
         </h2>
