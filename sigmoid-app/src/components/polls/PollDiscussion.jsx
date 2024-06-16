@@ -88,7 +88,6 @@ export default function PollDiscussion() {
       );
 
       const resp = await api.post(`/ratings/recalc-avg/${poll.product.id}`);
-      const newRating = resp.data["average_rating"];
 
       const sum = resp.data["average_rating"].values.reduce(
         (accumulator, currentValue) => accumulator + currentValue,
@@ -172,7 +171,7 @@ export default function PollDiscussion() {
                   emptyIcon={<StarBorderIcon fontSize="small" />}
                 />
                 <Typography variant="h5" color="text.secondary">
-                  {avg.toFixed(0.1)}
+                  {avg.toFixed(0.1) / 2}
                 </Typography>
               </Box>
               <Typography variant="body1">Characteristics:</Typography>

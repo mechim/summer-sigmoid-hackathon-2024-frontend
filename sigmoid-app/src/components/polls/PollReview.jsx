@@ -61,7 +61,7 @@ export default function PollReview({ review }) {
                   emptyIcon={<StarBorderIcon fontSize="small" />}
                 />
                 <Typography variant="h5" color="text.secondary">
-                  {review.values[index]}
+                  {review.values[index] / 2}
                 </Typography>
               </Box>
             ))}
