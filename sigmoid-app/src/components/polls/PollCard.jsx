@@ -35,8 +35,8 @@ export default function PollCard({ poll }) {
       <CardMedia
         component="img"
         sx={{
-          width: 110,
-          height: 110,
+          width: 100,
+          height: 100,
           objectFit: "cover",
           borderRadius: 1,
         }}
@@ -62,14 +62,22 @@ export default function PollCard({ poll }) {
         >
           <Typography variant="body1">Characteristics:</Typography>
           {poll.product.category.parameters_list.map((parameter, index) => (
-            <Box key={index} sx={{ display: "flex", gap: 1, width: 300 }}>
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                gap: 1,
+                width: 300,
+              }}
+            >
               <Typography variant="body2" color="text.secondary">
                 {parameter}:
               </Typography>
               <Rating
-                value={poll.values[index]}
+                value={poll.values[index] / 2}
                 readOnly
                 precision={0.1}
+                max={5}
                 icon={<StarIcon fontSize="small" />}
                 emptyIcon={<StarBorderIcon fontSize="small" />}
               />

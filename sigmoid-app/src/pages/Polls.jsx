@@ -8,15 +8,15 @@ export default function Polls() {
   const [polls, setPolls] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPolls, setFilteredPolls] = useState(polls);
+  const [filteredPolls, setFilteredPolls] = useState([]);
 
   useEffect(() => {
     const fetchRandomPolls = async () => {
       try {
         const categoryId = localStorage.getItem("category");
         const response = await api.get(`/ratings/get-rr-by-cat/${categoryId}`);
-        console.log(response.data["ratings_data"]);
         setPolls(response.data["ratings_data"]);
+        setFilteredPolls(response.data["ratings_data"]);
       } catch (error) {
         console.log(error);
       }
@@ -29,16 +29,16 @@ export default function Polls() {
     setSearchQuery(event.target.value);
   };
 
-  const filterPolls = () => {
-    const filtered = polls.filter((poll) =>
-      poll.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filterPolls = async () => {
+    const response = await api.post("/ratings/get_by_pn", {
+      name: searchQuery,
+    });
+
+    const filtered = response.data["ratings"].filter(
+      (poll) => poll.author.username === "KidNamedAverage"
     );
     setFilteredPolls(filtered);
   };
-
-  useEffect(() => {
-    filterPolls();
-  }, [searchQuery]);
 
   return (
     <Container
@@ -80,7 +80,7 @@ export default function Polls() {
           alignItems: "center",
         }}
       >
-        {polls.map((poll, index) => (
+        {filteredPolls.map((poll, index) => (
           <PollCard key={index} poll={poll} />
         ))}
       </Box>
