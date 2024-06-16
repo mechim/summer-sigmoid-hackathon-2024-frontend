@@ -3,56 +3,60 @@ import { useEffect, useState } from "react";
 import MyTinderCard from "../tinder/MyTinderCard";
 import { Button } from "@mui/material";
 const productData = [
-    {
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s',
-        name: 'T9X Note 9'
-    },
-    {
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s',
-        name: 'Redmi'
-    },
-    {
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s',
-        name: 'IPhone'
-    },
-    {
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s',
-        name: 'China'
-    },
-]
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s",
+    name: "T9X Note 9",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s",
+    name: "Redmi",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s",
+    name: "IPhone",
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s",
+    name: "China",
+  },
+];
 
-function TinderMain({cards}) {
-    const [products, setProducts] = useState(cards);
-    // const [direction, setDirection] = useState('');
-    const [ids, setIds] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
+function TinderMain({ cards }) {
+  const [products, setProducts] = useState(cards);
+  // const [direction, setDirection] = useState('');
+  const [ids, setIds] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(()=> {
-        const fetchCards = async() =>{
-          products = JSON.parse(localStorage.getItem('tinder-cards'));
-        }
-        fetchCards();
-    }, [])
+  useEffect(() => {
+    const fetchCards = async () => {
+      setProducts(JSON.parse(localStorage.getItem("tinder-cards")));
+    };
+    fetchCards();
+  }, []);
 
-    const handleLike = (id) => {
-      setIds(ids.push(id));
-      localStorage.setItem('ids', ids);
-    }
+  const handleLike = (id) => {
+    setIds(ids.push(id));
+    localStorage.setItem("ids", ids);
+  };
   const swiped = (direction, idToLike) => {
-    console.log('swiped!');
+    console.log("swiped!");
     // setDirection(direction.toString());
-    if (direction == 'left'){            
-           
-    } else if (direction == 'right'){
-        handleLike(idToLike);
+    if (direction == "left") {
+    } else if (direction == "right") {
+      handleLike(idToLike);
     }
-
   };
   const tinderOffset = 350;
 
-  const outOfFrame = async(name) => {
+  const outOfFrame = async (name) => {
     console.log(name + " left the screen!");
-    setProducts(products => products.filter(product => product.name !== name));
+    setProducts((products) =>
+      products.filter((product) => product.name !== name)
+    );
   };
 
   return (
@@ -69,33 +73,40 @@ function TinderMain({cards}) {
         justifyItems: "center",
       }}
     >
-        <h1  style={{ position: "absolute" ,top:-tinderOffset}}>For You</h1>
-        <h2 style={{ position: "absolute" }}>
-            No more products Left
-        </h2>
-        {products.map((product) => (
-            <>
-                <TinderCard
-                    className="swipe"
-                    onSwipe={(dir) => swiped(dir, product.name)}
-                    key={product.name}
-                    onCardLeftScreen={() => outOfFrame(product.name)}
-                    preventSwipe={["down", "up"]}
-                    swipeRequirementType="velocity"
-                    swipeThreshold={1}
-                    >
-                        <MyTinderCard title={product.name} image={product.image}/>
-                </TinderCard>
-            </>
-        ))}
-        {products[0] ? 
-            <div style={{position: 'relative', top: tinderOffset/1.2, width: '85%', display: 'flex', flexDirection: 'row', justifyContent:'space-between'}}>
-                <Button size='large' style={{color:'black', fontWeight: 'bold'}}>Nope</Button>
-                <Button style={{color:'black', fontWeight: 'bold'}}>Like</Button>
-
-            </div>
-            : null
-        }
+      <h1 style={{ position: "absolute", top: -tinderOffset }}>For You</h1>
+      <h2 style={{ position: "absolute" }}>No more products Left</h2>
+      {products.map((product) => (
+        <>
+          <TinderCard
+            className="swipe"
+            onSwipe={(dir) => swiped(dir, product.name)}
+            key={product.name}
+            onCardLeftScreen={() => outOfFrame(product.name)}
+            preventSwipe={["down", "up"]}
+            swipeRequirementType="velocity"
+            swipeThreshold={1}
+          >
+            <MyTinderCard title={product.name} image={product.image} />
+          </TinderCard>
+        </>
+      ))}
+      {products[0] ? (
+        <div
+          style={{
+            position: "relative",
+            top: tinderOffset / 1.2,
+            width: "85%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Button size="large" style={{ color: "black", fontWeight: "bold" }}>
+            Nope
+          </Button>
+          <Button style={{ color: "black", fontWeight: "bold" }}>Like</Button>
+        </div>
+      ) : null}
     </div>
   );
 }
