@@ -92,7 +92,6 @@ export default function Navbar() {
                 color: "#D993A7",
                 fontSize: "20px",
               },
-
             },
           }}
         />

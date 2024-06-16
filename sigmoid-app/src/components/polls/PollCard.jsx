@@ -22,8 +22,6 @@ export default function PollCard({ poll }) {
     <Card
       sx={{
         width: 340,
-        display: "flex",
-        alignItems: "center",
         px: 2,
         py: 0.5,
         cursor: "pointer",
@@ -35,42 +33,46 @@ export default function PollCard({ poll }) {
       <CardMedia
         component="img"
         sx={{
-          width: 100,
-          height: 100,
+          width: "100%",
+          height: "auto",
           objectFit: "cover",
           borderRadius: 1,
+          transform: "scale(0.8)",
         }}
         image={poll.product.image_url}
         alt={poll.product.name}
       />
-      <CardContent sx={{ flex: 1 }}>
-        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+      <CardContent>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+            mb: 2,
+            mt: -4,
+          }}
+        >
           <Typography
-            variant="h5"
+            variant="h4"
             component="div"
             sx={{ flex: 1, color: "#D993A7" }}
           >
             {poll.product.name}
           </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 1,
-          }}
-        >
-          <Typography variant="body1">Characteristics:</Typography>
           {poll.product.category.parameters_list.map((parameter, index) => (
             <Box
               key={index}
               sx={{
                 display: "flex",
+                alignItems: "center",
+                ml: 6,
                 gap: 1,
                 width: 300,
               }}
             >
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="h6" color="text.secondary">
                 {parameter}:
               </Typography>
               <Rating
@@ -78,11 +80,11 @@ export default function PollCard({ poll }) {
                 readOnly
                 precision={0.1}
                 max={5}
-                icon={<StarIcon fontSize="small" />}
-                emptyIcon={<StarBorderIcon fontSize="small" />}
+                icon={<StarIcon fontSize="medium" />}
+                emptyIcon={<StarBorderIcon fontSize="medium" />}
               />
-              <Typography variant="body2" color="text.secondary">
-                {poll.values[index].toFixed(1)}
+              <Typography variant="h6" color="text.secondary">
+                {poll.values[index].toFixed(1) / 2}
               </Typography>
             </Box>
           ))}
