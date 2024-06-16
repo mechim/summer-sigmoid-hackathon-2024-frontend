@@ -3,7 +3,6 @@ import { Box, Container, Typography, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import api from "../axios";
 
-
 export default function Polls() {
   const [polls, setPolls] = useState([]);
 
@@ -53,7 +52,14 @@ export default function Polls() {
         pt: 2,
       }}
     >
-      <Typography variant="h3" sx={{ textAlign: "center", color: "#D993A7", fontFamily:'Brush Script MT, cursive ' }}>
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "#D993A7",
+          fontFamily: "Brush Script MT, cursive ",
+        }}
+      >
         {" "}
         Review
       </Typography>
@@ -77,6 +83,9 @@ export default function Polls() {
           flexDirection: "column",
           gap: 3,
           alignItems: "center",
+          "& > :last-child": {
+            mb: 5,
+          },
         }}
       >
         {filteredPolls.map((poll, index) => (
