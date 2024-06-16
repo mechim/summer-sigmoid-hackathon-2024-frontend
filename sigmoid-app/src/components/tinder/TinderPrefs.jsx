@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import api from "../../axios";
 const propertiesData = [
-  "camera",
-  "battery",
   "durability",
+  "battery",
+  "camera",
   "performance",
   "memory",
 ];
@@ -34,35 +34,37 @@ function TinderPrefs({ onFinish }) {
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const fetchCards = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await api.get("/ratings/get-tc/2", properties);
-        console.log(response.data);
-        localStorage.setItem("tinder-cards", response.data);
-      } catch (error) {
-        alert(error.message);
-      }
-      setIsLoading(false);
-    };
-
-    fetchCards();
+    
 
     setPropertyPairs(pairEachElement(properties));
     setStarted(true);
   }, []);
 
   useEffect(() => {
-    console.log(propertyPairs.length + " " + started);
+    const fetchCards = async () => {
+      setIsLoading(true);
+
+      // try {
+      //   const response = await api.post("/ratings/get-tc/2", {parameters_priority: properties});
+      //   console.log(response.data);
+      //   localStorage.setItem("tinder-cards", JSON.stringify(response.data));
+      // } catch (error) {
+      //   alert(error.message);
+      // }
+      setIsLoading(false);
+  };
+
+  
+    // console.log(propertyPairs.length + " " + started);
+    // console.log({parameters_priority: JSON.stringify(properties)});
     if (propertyPairs.length <= 0) {
       if (!started) {
         return;
       }
 
       localStorage.setItem("prefs", true);
-
-      const response = api.post("/");
+      localStorage.setItem("my-prefs", JSON.stringify(properties));
+      // fetchCards();
       onFinish();
       // setCheckPrefs(true);
     }

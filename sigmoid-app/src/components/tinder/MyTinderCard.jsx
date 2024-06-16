@@ -12,13 +12,14 @@ export default function MyTinderCard({type, title, image, text, prefs}) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="320"
+          // sx={{transform: 'scale(1.25)'}}
           image={image}
           alt="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {title}
+            <b>{title}</b>
           </Typography>
           <Typography variant="body2" color="text.secondary">
           {text}

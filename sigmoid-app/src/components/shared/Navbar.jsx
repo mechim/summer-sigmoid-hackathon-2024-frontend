@@ -57,7 +57,7 @@ export default function Navbar() {
           }}
         />
         <BottomNavigationAction
-          label="Tinder"
+          label="For You"
           sx={{
             fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {

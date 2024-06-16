@@ -9,8 +9,8 @@ export default function Matches() {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        //const matchingIds = JSON.parse(localStorage.getItem("ids"));
-        const matchingIds = [1, 2, 3, 4];
+        const matchingIds = JSON.parse(localStorage.getItem("ids"));
+        // const matchingIds = [1, 2, 3, 4];
         const response = await api.post("/ratings/get-avgs-by-ids", {
           ids: matchingIds,
         });
