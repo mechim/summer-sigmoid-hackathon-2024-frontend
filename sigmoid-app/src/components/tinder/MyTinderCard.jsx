@@ -10,7 +10,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 export default function MyTinderCard({ type, title, image, text, prefs }) {
   return (
     type != 'prefs' ?
-      <Card sx={{ width: 300, height: 420, borderRadius: 3, backgroundColor: '#ffdee7' }}>
+      <Card sx={{ width: 300, height: 450, borderRadius: 3, backgroundColor: '#ffdee7' }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -20,16 +20,17 @@ export default function MyTinderCard({ type, title, image, text, prefs }) {
             alt="green iguana"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h5" component="div" style={{color: "#000",
+          fontFamily: "Brush Script MT, cursive",}}>
               <b>{title}</b>
             </Typography>
             <Typography variant="body2" color="text.secondary" style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
-              <b>{text[0]} : </b> <Rating
+              <b style={{color:"#000"}}>{text[0]} : </b> <Rating
                 value={text[1] / 2}
                 readOnly
                 precision={0.1}
-                icon={<StarIcon fontSize="small" />}
-                emptyIcon={<StarBorderIcon fontSize="small" />}
+                icon={<StarIcon fontSize="small" style={{color:'#000'}}/>}
+                emptyIcon={<StarBorderIcon fontSize="small" style={{color:'#000'}} />}
               // style={{marginBottom: }}
               />
             </Typography>
