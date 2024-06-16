@@ -1,19 +1,28 @@
 import { Box, Container, Typography } from "@mui/material";
 import MatchCard from "../components/matches/MatchCard";
+import { useEffect, useState } from "react";
+import api from "../axios";
 
 export default function Matches() {
-  const matches = [
-    {
-      name: "Product 1",
-      image: "https://via.placeholder.com/140",
-      categories: [{ name: "Category 1" }, { name: "Category 2" }],
-    },
-    {
-      name: "Product 2",
-      image: "https://via.placeholder.com/140",
-      categories: [{ name: "Category 1" }, { name: "Category 2" }],
-    },
-  ];
+  const [matches, setMatches] = useState([]);
+
+  useEffect(() => {
+    const fetchMatches = async () => {
+      try {
+        //const matchingIds = JSON.parse(localStorage.getItem("ids"));
+        const matchingIds = [1, 2, 3, 4];
+        const response = await api.post("/ratings/get-avgs-by-ids", {
+          ids: matchingIds,
+        });
+
+        setMatches(response.data["ratings_data"]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchMatches();
+  }, []);
 
   return (
     <Container
@@ -28,7 +37,15 @@ export default function Matches() {
         pt: 2,
       }}
     >
-      <Typography gutterBottom variant="h2" sx={{ textAlign: "center" }}>
+      <Typography
+        gutterBottom
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "#D993A7",
+          fontFamily: "Brush Script MT, cursive",
+        }}
+      >
         {" "}
         Matches
       </Typography>

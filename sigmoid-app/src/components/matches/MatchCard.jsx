@@ -1,55 +1,47 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, Typography } from "@mui/material";
 
 export default function MatchCard({ match }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate("/discussion", { state: { poll: match } });
+  };
+
   return (
     <Card
       sx={{
         width: 320,
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
         px: 2,
         py: 0.5,
       }}
+      onClick={handleCardClick}
     >
-      <CardMedia
-        component="img"
+      <CardContent
         sx={{
-          width: 120,
-          height: 120,
-          mr: 2,
-          objectFit: "cover",
-          borderRadius: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-        image={match.image}
-        alt={match.name}
-      />
-      <CardContent sx={{ flex: 1 }}>
-        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" component="div" sx={{ flex: 1 }}>
-            {match.name}
+      >
+        <Typography variant="h4" sx={{ flex: 1, color: "#D993A7" }}>
+          {match.product.name}
+        </Typography>
+        <Typography variant="h5" sx={{ mt: 2 }}>
+          Matching criteria:
+        </Typography>
+        {match.product.category.parameters_list.map((parameter, index) => (
+          <Typography key={index} variant="h6" color="text.secondary">
+            {parameter}
           </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 1,
-          }}
-        >
-          <Typography variant="body1">Matching categories:</Typography>
-          {match.categories.map((category, index) => (
-            <Typography
-              key={index}
-              variant="body2"
-              color="text.secondary"
-              sx={{ ml: 2 }}
-            >
-              {category.name}
-            </Typography>
-          ))}
-        </Box>
+        ))}
       </CardContent>
     </Card>
   );

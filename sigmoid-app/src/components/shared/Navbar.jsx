@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <Box
       className="container"
-      sx={{ position: "fixed", bottom: "0", width: "393px"}}
+      sx={{ position: "fixed", bottom: "0", width: "393px" }}
     >
       <BottomNavigation
         showLabels
@@ -37,37 +37,41 @@ export default function Navbar() {
       >
         <BottomNavigationAction
           label="Review"
-          sx={{ fontSize: "20px",
+          sx={{
+            fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
+              fontFamily: 'Brush Script MT, cursive',
             },
             "&.Mui-selected": {
-              color: "#427aa1",
+              color: "#D993A7",
               fontSize: "20px",
             },
             "&:hover": {
               "& .MuiBottomNavigationAction-label": {
-                color: "#427aa1",
-                fontSize: "20px", 
+                color: "#D993A7",
+                fontSize: "20px",
               },
             },
           }}
         />
         <BottomNavigationAction
           label="Tinder"
-          sx={{fontSize: "20px",
+          sx={{
+            fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
+              fontFamily: 'Brush Script MT, cursive',
             },
             "&.Mui-selected": {
-              color: "#427aa1",
+              color: "#D993A7",
               fontSize: "20px",
             },
             "&:hover": {
               "& .MuiBottomNavigationAction-label": {
-                color: "#427aa1",
+                color: "#D993A7",
                 fontSize: "20px",
               },
             },
@@ -75,22 +79,23 @@ export default function Navbar() {
         />
         <BottomNavigationAction
           label="Matches"
-          sx={{ 
+          sx={{
+            
             fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
+              fontFamily: 'Brush Script MT, cursive',
             },
             "&.Mui-selected": {
-              color: "#427aa1",
+              color: "#D993A7",
               fontSize: "20px",
             },
             "&:hover": {
               "& .MuiBottomNavigationAction-label": {
-                color: "#427aa1",
+                color: "#D993A7",
                 fontSize: "20px",
               },
-
             },
           }}
         />
