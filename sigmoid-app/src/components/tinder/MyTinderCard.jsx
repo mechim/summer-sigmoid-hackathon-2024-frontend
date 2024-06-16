@@ -3,12 +3,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, Button } from '@mui/material';
+import { CardActionArea, CardActions, Button, Rating } from '@mui/material';
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 export default function MyTinderCard({type, title, image, text, prefs}) {
   return (
     type != 'prefs'? 
-    <Card sx={{ width:300, height: 400, borderRadius: 3, backgroundColor: 'lightgray'}}>
+    <Card sx={{ width:300, height: 420, borderRadius: 3, backgroundColor: 'lightgray'}}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -21,8 +23,15 @@ export default function MyTinderCard({type, title, image, text, prefs}) {
           <Typography gutterBottom variant="h5" component="div">
             <b>{title}</b>
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-          {text}
+          <Typography variant="body2" color="text.secondary" style={{display: 'flex', alignItems:'center', marginTop:10}}>
+          <b>{text[0]} : </b> <Rating
+                  value={text[1] / 2}
+                  readOnly
+                  precision={0.1}
+                  icon={<StarIcon fontSize="small" />}
+                  emptyIcon={<StarBorderIcon fontSize="small" />}
+                  // style={{marginBottom: }}
+                />
           </Typography>
         </CardContent>
       </CardActionArea>
