@@ -2,7 +2,7 @@ import { Container, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import api from "../axios";
 import { useEffect, useState } from "react";
-// import logo from "../img/lo  go.png"
+import logo from "../img/logo.png";
 
 export default function Categories() {
   const navigate = useNavigate();
@@ -28,11 +28,27 @@ export default function Categories() {
   };
 
   return (
-    <div style={{ width: "393px", height: "873px", marginTop:"50px" }}>
-      {/* <div style={{ display:"flex", flexDirection: 'row', alignItems: 'center', justifyContent:"center",}}>
-        <img src={logo} width=  "150" />
-        <p style={{ color: "#D993A7", fontSize: "22px", fontStyle: "bold", marginLeft:"10px" }}>MATCHER</p>
-      </div> */}
+    <div style={{ width: "393px", height: "873px", marginTop: "50px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img src={logo} width="150" />
+        <p
+          style={{
+            color: "#D993A7",
+            fontSize: "22px",
+            fontStyle: "bold",
+            marginLeft: "10px",
+          }}
+        >
+          MATCHER
+        </p>
+      </div>
 
       <Container
         sx={{
