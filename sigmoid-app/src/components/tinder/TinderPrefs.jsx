@@ -143,9 +143,20 @@ function TinderPrefs({ onFinish }) {
       }}
     >
       {/* <LinearProgress value={progress} style={{position: 'absolute', top:2*tinderOffset}}/> */}
-      <h1 style={{ position: "absolute", top: -tinderOffset }}>
+  
+      <Typography
+        gutterBottom
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "#D993A7",
+          fontFamily: "Brush Script MT, cursive",
+          position: "absolute", top: -tinderOffset,
+        }}
+      >
+        {" "}
         Set your preferences
-      </h1>
+      </Typography>
       {/* <h2 style={{ position: "absolute" }}>
             No more People Left
         </h2> */}
@@ -159,6 +170,7 @@ function TinderPrefs({ onFinish }) {
             preventSwipe={["down", "up"]}
             swipeRequirementType="velocity"
             swipeThreshold={1}
+            
           >
             <MyTinderCard type="prefs" prefs={pair} />
           </TinderCard>
@@ -173,12 +185,13 @@ function TinderPrefs({ onFinish }) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            
           }}
         >
-          <Button size="large" style={{ color: "black", fontWeight: "bold" }}>
+          <Button  style={{ color: "#000", fontFamily: "Brush Script MT, cursive", fontWeight: "bold", fontSize:"18px" }}>
             {propertyPairs[propertyPairs.length - 1][0]}
           </Button>
-          <Button style={{ color: "black", fontWeight: "bold" }}>
+          <Button style={{ color: "#000", fontFamily: "Brush Script MT, cursive", fontWeight: "bold", fontSize:"18px" }}>
             {propertyPairs[propertyPairs.length - 1][1]}
           </Button>
         </div>

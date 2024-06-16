@@ -1,7 +1,7 @@
 import TinderCard from "react-tinder-card";
 import { useEffect, useState } from "react";
 import MyTinderCard from "../tinder/MyTinderCard";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Typography, } from "@mui/material";
 import api from "../../axios";
 
 function TinderMain() {
@@ -24,7 +24,6 @@ function TinderMain() {
       // setCards(JSON.parse(localStorage.getItem("tinder-cards")).cards);
       localStorage.setItem("ids", JSON.stringify([]));
     };
-    console.log('kill yourself');
     fetchCards();
   }, []);
 
@@ -67,7 +66,21 @@ function TinderMain() {
         justifyItems: "center",
       }}
     >
-      <h1 style={{ position: "absolute", top: -tinderOffset }}>For You</h1>
+       <Typography
+        gutterBottom
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          color: "#D993A7",
+          fontFamily: "Brush Script MT, cursive",
+          position: "absolute", 
+          top: -tinderOffset,
+          marginTop: "20px"
+        }}
+      >
+        {" "}
+        For You
+      </Typography>
       <h2 style={{ position: "absolute" }}>No more products Left</h2>
       {cards.map((card) => (
         <>
@@ -95,10 +108,10 @@ function TinderMain() {
             justifyContent: "space-between",
           }}
         >
-          <Button size="large" style={{ color: "black", fontWeight: "bold" }}>
+          <Button  style={{color: "#000", fontFamily: "Brush Script MT, cursive", fontWeight: "bold", fontSize:"22px" }}>
             Nope
           </Button>
-          <Button style={{ color: "black", fontWeight: "bold" }}>Like</Button>
+          <Button style={{ color: "#000", fontFamily: "Brush Script MT, cursive", fontWeight: "bold", fontSize:"22px" }}>Like</Button>
         </div>
       ) : null}
     </div>

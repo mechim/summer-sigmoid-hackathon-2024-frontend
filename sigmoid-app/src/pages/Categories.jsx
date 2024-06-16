@@ -41,12 +41,12 @@ export default function Categories() {
         <p
           style={{
             color: "#D993A7",
-            fontSize: "22px",
+            fontSize: "28px",
             fontStyle: "bold",
             marginLeft: "10px",
           }}
         >
-          MATCHER
+          SWIPY
         </p>
       </div>
 

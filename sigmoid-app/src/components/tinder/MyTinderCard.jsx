@@ -8,7 +8,7 @@ import { CardActionArea, CardActions, Button } from '@mui/material';
 export default function MyTinderCard({type, title, image, text, prefs}) {
   return (
     type != 'prefs'? 
-    <Card sx={{ width:300, height: 400, borderRadius: 3, backgroundColor: 'lightgray'}}>
+    <Card sx={{ width:300, height: 400, borderRadius: 3, backgroundColor: '#ffdee7'}}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -28,7 +28,16 @@ export default function MyTinderCard({type, title, image, text, prefs}) {
       </CardActionArea>
     </Card>
    :
-  <Card sx={{ width:300, height: 400, borderRadius: 3, backgroundColor: 'lightgray'}}>
+  <Card sx={{ 
+      width:300, 
+      height: 400, 
+      borderRadius: 3, 
+      backgroundColor:"#ffdee7",  
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',}}>
 
   <CardActionArea>
     
