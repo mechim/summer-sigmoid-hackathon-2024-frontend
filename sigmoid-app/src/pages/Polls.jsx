@@ -2,7 +2,7 @@ import PollCard from "../components/polls/PollCard";
 import { Box, Container, Typography, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import api from "../axios";
-import review from "../img/review.png"
+
 
 export default function Polls() {
   const [polls, setPolls] = useState([]);
@@ -57,7 +57,6 @@ export default function Polls() {
         {" "}
         Review
       </Typography>
-      {/* <img width="200px" src={review} alt="Review"/> */}
       <TextField
         id="search"
         label="Search Polls"

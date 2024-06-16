@@ -42,6 +42,7 @@ export default function Navbar() {
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
+              fontFamily: 'Brush Script MT, cursive',
             },
             "&.Mui-selected": {
               color: "#D993A7",
@@ -62,6 +63,7 @@ export default function Navbar() {
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
+              fontFamily: 'Brush Script MT, cursive',
             },
             "&.Mui-selected": {
               color: "#D993A7",
@@ -78,10 +80,12 @@ export default function Navbar() {
         <BottomNavigationAction
           label="Matches"
           sx={{
+            
             fontSize: "20px",
             "& .MuiBottomNavigationAction-label": {
               color: "#000",
               fontSize: "20px",
+              fontFamily: 'Brush Script MT, cursive',
             },
             "&.Mui-selected": {
               color: "#D993A7",
