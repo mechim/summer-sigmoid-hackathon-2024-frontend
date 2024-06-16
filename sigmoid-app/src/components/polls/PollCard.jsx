@@ -48,7 +48,7 @@ export default function PollCard({ poll }) {
           <Typography
             variant="h5"
             component="div"
-            sx={{ flex: 1, color: "#427aa1" }}
+            sx={{ flex: 1, color: "#D993A7" }}
           >
             {poll.product.name}
           </Typography>

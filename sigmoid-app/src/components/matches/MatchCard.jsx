@@ -27,7 +27,7 @@ export default function MatchCard({ match }) {
       />
       <CardContent sx={{ flex: 1 }}>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" component="div" sx={{ flex: 1, color:"#427aa1" }}>
+          <Typography variant="h5" component="div" sx={{ flex: 1, color: "#D993A7" }}>
             {match.name}
           </Typography>
         </Box>

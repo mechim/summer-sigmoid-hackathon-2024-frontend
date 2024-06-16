@@ -52,7 +52,7 @@ export default function Categories() {
               onClick={() => handleCategoryChoice(category.id)}
               sx={{
                 mt: 2,
-                backgroundColor: "#427aa1",
+                backgroundColor: "#D993A7",
                 width: "300px",
                 height: "50px",
                 fontSize: "24px",
