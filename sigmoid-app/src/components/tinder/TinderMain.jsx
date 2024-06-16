@@ -21,17 +21,30 @@ const productData = [
     },
 ]
 
-function TinderMain() {
-    const [products, setProducts] = useState(productData);
-    const [direction, setDirection] = useState('');
+function TinderMain({cards}) {
+    const [products, setProducts] = useState(cards);
+    // const [direction, setDirection] = useState('');
+    const [ids, setIds] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
 
-  const swiped = (direction, nameToDelete) => {
+    useEffect(()=> {
+        const fetchCards = async() =>{
+          products = JSON.parse(localStorage.getItem('tinder-cards'));
+        }
+        fetchCards();
+    }, [])
+
+    const handleLike = (id) => {
+      setIds(ids.push(id));
+      localStorage.setItem('ids', ids);
+    }
+  const swiped = (direction, idToLike) => {
     console.log('swiped!');
-    setDirection(direction.toString());
+    // setDirection(direction.toString());
     if (direction == 'left'){            
            
     } else if (direction == 'right'){
-        
+        handleLike(idToLike);
     }
 
   };

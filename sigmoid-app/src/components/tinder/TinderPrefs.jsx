@@ -1,13 +1,14 @@
 import TinderCard from "react-tinder-card";
 import { useEffect, useState } from "react";
 import MyTinderCard from "../tinder/MyTinderCard";
-import { Button, LinearProgress } from "@mui/material";
+import { Button, LinearProgress, CircularProgress, Typography } from "@mui/material";
+import api from "../../axios";
 const propertiesData = [
-    'Camera',
-    'Battery',
-    'Durability',
-    'Performance',
-    'Memory'
+    'camera',
+    'battery',
+    'durability',
+    'performance',
+    'memory'
 ]
 function pairEachElement(arr) {
     let pairs = [];
@@ -22,14 +23,27 @@ function pairEachElement(arr) {
   }
 
 function TinderPrefs({onFinish}) {
-  // const {setCheckPrefs} = props;
+  const [isLoading, setIsLoading] = useState(false);
   const [properties, setProperties] = useState(propertiesData);
   const [propertyPairs, setPropertyPairs] = useState([]);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
+    const fetchCards = async() =>{
+      setIsLoading(true);
+
+      try{
+        const response = await api.get("/ratings/get-tc/2", properties);
+        localStorage.setItem('tinder-cards', response.data);
+      } catch(error){
+        alert(error.message);
+      }
+      setIsLoading(false);
+    }
+
+    fetchCards();
+
     setPropertyPairs(pairEachElement(properties));
-    const ogLength = propertyPairs.length;
     setStarted(true);
   }, []);
 
@@ -41,6 +55,8 @@ function TinderPrefs({onFinish}) {
       } 
 
       localStorage.setItem('prefs', true);
+
+      const response = api.post('/')
       onFinish();
       // setCheckPrefs(true);
     }
@@ -91,7 +107,12 @@ function TinderPrefs({onFinish}) {
   const tinderOffset = 350;
 
   return (
-    <div
+    isLoading? <div style={{display: "flex", flexDirection: 'column' ,justifyContent:'center', alignContent: 'center', alignItems:'center'}}>
+      <CircularProgress/>
+      <Typography>Getting products based on your preferences...</Typography>
+    </div> :
+      
+      <div
       style={{
         position: "absolute",
         top: tinderOffset,
@@ -133,6 +154,9 @@ function TinderPrefs({onFinish}) {
             : null
         }
     </div>
+
+    
+    
   );
 }
 

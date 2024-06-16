@@ -27,24 +27,16 @@ export default function MyTinderCard({type, title, image, text, prefs}) {
       </CardActionArea>
     </Card>
    :
-  // <Card sx={{ width:300, height: 400, borderRadius: 3, backgroundColor: '#49a078'}}>
   <Card sx={{ width:300, height: 400, borderRadius: 3, backgroundColor: 'lightgray'}}>
 
   <CardActionArea>
-    {/* <CardMedia
-      component="img"
-      height="140"
-      image={image}
-      alt="green iguana"
-    /> */}
+    
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
         
         What is more important? <b>{prefs[0]}</b> or <b>{prefs[1]}</b>
       </Typography>
       <Typography variant="body2" color="text.secondary">
-      {/* <Typography variant="body2" color="white"> */}
-
       {text}
       </Typography>
     </CardContent>

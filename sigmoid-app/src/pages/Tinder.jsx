@@ -8,38 +8,35 @@ import TinderPrefs from "../components/tinder/TinderPrefs";
 import { tryStatement } from "@babel/types";
 import api from "../axios";
 function Tinder() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState('');
-  const [havePrefs, setHavePrefs] = useState(false);
-  const [checkPrefs, setCheckPrefs] = useState(false);
-  const finishPrefs = () => {
-    setCheckPrefs(true);
-  }
-  useEffect(() => {
-    const checkPrefs = async() => {
-      const prefs = localStorage.getItem('prefs');
-      if (prefs == 'true'){
-        setHavePrefs(true);
-      } else {
-        setHavePrefs(false);
-      }
-    } 
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [loadingMessage, setLoadingMessage] = useState('');
+  // const [havePrefs, setHavePrefs] = useState(false);
+  // const [checkPrefs, setCheckPrefs] = useState(false);
+  // const [cards, setCards] = useState({});
+  // const finishPrefs = () => {
+  //   setCheckPrefs(true);
+  // }
 
-    const fetchCategories = async() => {
-      try{
-        const response = api.get("/ratings/get-tc/2");
-        
-      } catch(error){
-        alert(error);
-      }
-    }
-    checkPrefs();
+  // const handleCards = (_cards) => {
+  //   setCards(_cards);
+  // }
+  // useEffect(() => {
+  //   const checkPrefs = async() => {
+  //     const prefs = localStorage.getItem('prefs');
+  //     if (prefs == 'true'){
+  //       setHavePrefs(true);
+  //     } else {
+  //       setHavePrefs(false);
+  //     }
+  //   } 
+  //   checkPrefs();
     
-  }, [checkPrefs])
+  // }, [checkPrefs])
   
   return (
-    havePrefs? <TinderMain/> 
-    : <TinderPrefs onFinish={finishPrefs}/>
+    // havePrefs? <TinderMain/> 
+    // : <TinderPrefs onFinish={finishPrefs}/>
+    <></>
   );
 }
 
