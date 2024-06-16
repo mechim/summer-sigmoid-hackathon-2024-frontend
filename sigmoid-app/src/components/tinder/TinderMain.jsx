@@ -47,6 +47,20 @@ function TinderMain() {
     cards.filter((card) => card.product.id !== id)
     );
   };
+  function findProperty (item){
+    let max, maxInd;
+    max = item.values[0];
+    for (let i = 0; i < item.values.length-1; i++){
+      if (item.values[i]> max){
+        max = item.values[i];
+        maxInd = i;
+      }
+    }
+    console.log(item.product.category.parameters_list[maxInd]);
+    return [item.product.category.parameters_list[maxInd], max];
+    
+    
+  }
 
   return (
     !cards[0]? <div style={{position: 'absolute', top:tinderOffset, left:170}}> 
@@ -93,7 +107,7 @@ function TinderMain() {
             swipeRequirementType="velocity"
             swipeThreshold={1}
           >
-            <MyTinderCard title={card.product.name + ", $" + card.product.price} image={card.product.tinder_image_url} />
+            <MyTinderCard title={card.product.name + ", $" + card.product.price} image={card.product.tinder_image_url} text={findProperty(card)} />
           </TinderCard>
         </>
       ))}
